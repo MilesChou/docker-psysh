@@ -1,0 +1,14 @@
+FROM php:%%PHP_VERSION%%
+
+LABEL repository="https://github.com/MilesChou/docker-psysh" \
+    maintainer="MilesChou <jangconan@gmail.com>"
+
+RUN set -xe && \
+        curl -LO https://psysh.org/psysh && \
+        chmod +x psysh && \
+        mv psysh /usr/local/bin/ && \
+        psysh -v
+
+COPY docker-entrypoint /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
